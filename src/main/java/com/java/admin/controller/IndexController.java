@@ -2,6 +2,7 @@ package com.java.admin.controller;
 
 import com.java.admin.entity.User;
 import com.java.admin.mapper.UserMapper;
+import com.java.admin.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -18,13 +19,13 @@ import java.util.List;
 public class IndexController {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     @ApiImplicitParam(name = "name",value = "姓名",required = true)
     @ApiOperation(value = "向客人问好")
     @GetMapping("/sayHi")
     public ResponseEntity<String> sayHi(@RequestParam(value = "name")String name){
-        List<User> users = this.userMapper.selectList(null);
+        List<User> users = this.userService.list(null);
         for (int i = 0; i < users.size(); i++) {//通过下标遍历数组
             System.out.println(users.get(i));
         }
