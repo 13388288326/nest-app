@@ -3,8 +3,10 @@ package com.java.admin.controller;
 import com.java.admin.entity.User;
 import com.java.admin.mapper.UserMapper;
 import com.java.admin.service.UserService;
+import com.java.admin.utils.Assert;
 import com.java.admin.utils.CustomException;
 import com.java.admin.utils.JWTUtils;
+import com.java.admin.utils.ResponseEnum;
 import io.jsonwebtoken.Claims;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -36,12 +38,8 @@ public class IndexController {
     public ResponseEntity<String> sayHi(@RequestParam(value = "name")String name){
         Map<String,Object> claims = new HashMap<>();
         claims.put("wj",2333);
-
-        Integer a = 1;
-        Integer b = 2;
-        if (a<b){
-            throw new CustomException("系统错误");
-        }
+        Object a = null;
+        Assert.notNull(a, ResponseEnum.PARAMS_IS_NULL);
 
         String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aiI6MjMzMywiZXhwIjoxNjQyODExMDk2fQ.xrIDIFfeJwwLK9o0wHphKicRiKsRzA13KBKukwGH1SQ";
 
