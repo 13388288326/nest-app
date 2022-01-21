@@ -1,7 +1,9 @@
 package com.java.admin.config;
 
+import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,18 +12,15 @@ import org.springframework.context.annotation.Configuration;
  */
 
 @Configuration
+@MapperScan("com.java.admin.mapper")
 public class MyBatisPlusConfig {
     /**
      * plus分页配置
      */
     @Bean
-    public MybatisPlusInterceptor paginationInterceptor() {
-        MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
-        //分页拦截器
-        PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor();
-        mybatisPlusInterceptor.addInnerInterceptor(paginationInnerInterceptor);
-        //最大单页限制数量
-        paginationInnerInterceptor.setMaxLimit(1000L);
-        return mybatisPlusInterceptor;
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+        return interceptor;
     }
 }
