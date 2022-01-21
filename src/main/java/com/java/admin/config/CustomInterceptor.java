@@ -14,7 +14,6 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("token");
-        System.out.println("token"+token);
         return true;
     }
 }
