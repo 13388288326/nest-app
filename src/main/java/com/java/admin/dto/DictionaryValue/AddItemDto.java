@@ -1,14 +1,17 @@
-package com.java.admin.dto.DictionaryCode;
+package com.java.admin.dto.DictionaryValue;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-@TableName("dictionary_code")
+@TableName("dictionary_value")
 public class AddItemDto {
-    @ApiModelProperty(value = "字典编码",required = true)
-    private String code;
+    @ApiModelProperty(value = "父级字典编码Id",required = true)
+    private Integer codeValueId;
+
+    @ApiModelProperty(value = "字典值",required = true)
+    private String value;
 
     @ApiModelProperty(value = "描述",required = true)
     private String description;
