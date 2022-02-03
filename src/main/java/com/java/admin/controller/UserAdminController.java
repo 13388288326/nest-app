@@ -7,6 +7,8 @@ import com.java.admin.service.UserAdminService;
 import com.java.admin.utils.CustomException;
 import com.java.admin.utils.R;
 import com.java.admin.utils.ResponseEnum;
+import com.java.admin.utils.ResultVoUtil;
+import com.java.admin.vo.ResultVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,20 +34,20 @@ public class UserAdminController {
         if (!isAdd) {
             throw new CustomException(ResponseEnum.INSERT_ERROR);
         }
-        return R.ok();
+        return R.success();
     }
-    
+
     @DeleteMapping("/{id}")
     @ApiOperation("删除")
-    public R deleteItem(@PathVariable String id){
+    public R deleteItem(@PathVariable String id) {
         this.userAdminService.removeById(id);
-        return R.ok();
+        return R.success();
     }
 
     @PutMapping("/{id}")
     @ApiOperation("修改")
-    public R modifyItem(@PathVariable String id,@RequestBody ModifyItemDto putObject){
-        if(!new Integer(id).equals(putObject.getId())){
+    public R modifyItem(@PathVariable String id, @RequestBody ModifyItemDto putObject) {
+        if (!id.equals(putObject.getId())) {
             throw new CustomException(ResponseEnum.PARAMS_IS_NULL);
         }
         UserAdmin admin = new UserAdmin();
@@ -56,13 +58,12 @@ public class UserAdminController {
         admin.setEnable(putObject.getEnable());
         admin.setId(putObject.getId());
         this.userAdminService.updateById(admin);
-        return R.ok();
+        return R.success();
     }
 
     @GetMapping("/{id}")
     @ApiOperation("详情")
-    public R getItem(@PathVariable String id){
-        UserAdmin item = this.userAdminService.getById(id);
-        return R.ok().data("details",item);
+    public R getItem(@PathVariable String id) {
+        return ResultVoUtil.success(this.userAdminService.getById(id));
     }
 }

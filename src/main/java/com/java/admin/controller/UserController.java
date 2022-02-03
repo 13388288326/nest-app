@@ -42,6 +42,6 @@ public class UserController {
         insertUser.setOpenId(user.getOpenId());
         boolean b = this.userService.save(insertUser);
         Assert.isTrue(b, ResponseEnum.INSERT_ERROR);
-        return R.ok();
+        return R.success();
     }
 }

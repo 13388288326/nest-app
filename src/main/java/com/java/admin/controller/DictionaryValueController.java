@@ -9,6 +9,7 @@ import com.java.admin.service.DictionaryValueService;
 import com.java.admin.utils.CustomException;
 import com.java.admin.utils.R;
 import com.java.admin.utils.ResponseEnum;
+import com.java.admin.utils.ResultVoUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,10 @@ public class DictionaryValueController {
 
     @PostMapping()
     @ApiOperation("新增")
-    public R addItem(@RequestBody AddItemDto addObject){
+    public R addItem(@RequestBody AddItemDto addObject) {
         DictionaryCode item = this.dictionaryCodeService.getById(addObject.getCodeValueId());
-        if(item == null){
-            throw new CustomException("未找到字典编码父级",500);
+        if (item == null) {
+            throw new CustomException("未找到字典编码父级", 500);
         }
         DictionaryValue dictionaryValue = new DictionaryValue();
         dictionaryValue.setValue(addObject.getValue());
@@ -40,20 +41,20 @@ public class DictionaryValueController {
         dictionaryValue.setCodeValueId(addObject.getCodeValueId());
         dictionaryValue.setCode(item.getCode());
         this.dictionaryValueService.save(dictionaryValue);
-        return R.ok();
+        return R.success();
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation("删除")
-    public R deleteItem(@PathVariable String id){
+    public R deleteItem(@PathVariable String id) {
         this.dictionaryValueService.removeById(id);
-        return R.ok();
+        return R.success();
     }
 
     @PutMapping("/{id}")
     @ApiOperation("修改")
-    public R modifyItem(@PathVariable String id,@RequestBody ModifyItemDto putObject){
-        if(!new Integer(id).equals(putObject.getId())){
+    public R modifyItem(@PathVariable String id, @RequestBody ModifyItemDto putObject) {
+        if (!new Integer(id).equals(putObject.getId())) {
             throw new CustomException(ResponseEnum.PARAMS_IS_NULL);
         }
         DictionaryValue dictionaryValue = new DictionaryValue();
@@ -62,20 +63,18 @@ public class DictionaryValueController {
         dictionaryValue.setSort(putObject.getSort());
         dictionaryValue.setId(putObject.getId());
         this.dictionaryValueService.updateById(dictionaryValue);
-        return R.ok();
+        return R.success();
     }
 
     @GetMapping("/{id}")
     @ApiOperation("详情")
-    public R getItem(@PathVariable String id){
-        DictionaryValue item = this.dictionaryValueService.getById(id);
-        return R.ok().data("details",item);
+    public R getItem(@PathVariable String id) {
+        return ResultVoUtil.success(this.dictionaryValueService.getById(id));
     }
 
     @GetMapping("/list")
     @ApiOperation("通过字典编码获取字典列表")
-    public R codeList(@RequestParam(name = "code",required = true) String code){
-        List<DictionaryValue> list = this.dictionaryValueService.getListByCode(code);
-        return R.ok().data("list",list);
+    public R codeList(@RequestParam(name = "code", required = true) String code) {
+        return ResultVoUtil.success(this.dictionaryValueService.getListByCode(code));
     }
 }

@@ -11,26 +11,44 @@ import java.util.Map;
  * */
 @Data
 public class R  {
-    private Integer code;
-    private String message;
-    private Map<String,Object> data = new HashMap<>();
-
     /**
-     * 构造函数私有化
-     */
-    private R(){}
+     * 描述信息
+     * */
+    private String message;
+    /**
+     * http状态码
+     * */
+    private Integer code;
+//    private Integer code;
+//    private String message;
+//    private Map<String,Object> data = new HashMap<>();
+//
+//    /**
+//     * 构造函数私有化
+//     */
+//    private R(){}
 
+//    /**
+//     * 返回成功结果
+//     * @return R
+//     */
+//    public static R ok(){
+//        R r = new R();
+//        r.setCode(ResponseEnum.SUCCESS.getCode());
+//        r.setMessage(ResponseEnum.SUCCESS.getMessage());
+//        return r;
+//    }
+//
     /**
      * 返回成功结果
      * @return R
      */
-    public static R ok(){
+    public static R success(){
         R r = new R();
         r.setCode(ResponseEnum.SUCCESS.getCode());
         r.setMessage(ResponseEnum.SUCCESS.getMessage());
         return r;
     }
-
     /**
      * 返回失败结果
      * @return R
@@ -43,6 +61,28 @@ public class R  {
     }
 
     /**
+     * 返回失败结果
+     * @return R
+     */
+    public static R error(String message,Integer code){
+        R r = new R();
+        r.setCode(code);
+        r.setMessage(message);
+        return r;
+    }
+
+    /**
+     * 返回失败结果
+     * @return R
+     */
+    public static R error(String message){
+        R r = new R();
+        r.setCode(ResponseEnum.ERROR.getCode());
+        r.setMessage(message);
+        return r;
+    }
+
+    /**
      * 设置特定返回结果
      * @return R
      */
@@ -51,20 +91,5 @@ public class R  {
         r.setCode(responseEnum.getCode());
         r.setMessage(responseEnum.getMessage());
         return r;
-    }
-
-    public R data(String key,Object value){
-        this.data.put(key,value);
-        return this;
-    }
-
-    public R message(String message){
-        this.message = message;
-        return this;
-    }
-
-    public R code(Integer code){
-        this.code = code;
-        return this;
     }
 }

@@ -7,6 +7,7 @@ import com.java.admin.service.DictionaryCodeService;
 import com.java.admin.utils.CustomException;
 import com.java.admin.utils.R;
 import com.java.admin.utils.ResponseEnum;
+import com.java.admin.utils.ResultVoUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,26 +23,26 @@ public class DictionaryCodeController {
 
     @PostMapping()
     @ApiOperation("新增")
-    public R addItem(@RequestBody AddItemDto addObject){
+    public R addItem(@RequestBody AddItemDto addObject) {
         DictionaryCode dictionaryCode = new DictionaryCode();
         dictionaryCode.setCode(addObject.getCode());
         dictionaryCode.setDescription(addObject.getDescription());
         dictionaryCode.setSort(addObject.getSort());
         this.dictionaryCodeService.save(dictionaryCode);
-        return R.ok();
+        return R.success();
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation("删除")
-    public R deleteItem(@PathVariable String id){
+    public R deleteItem(@PathVariable String id) {
         this.dictionaryCodeService.removeById(id);
-        return R.ok();
+        return R.success();
     }
 
     @PutMapping("/{id}")
     @ApiOperation("修改")
-    public R modifyItem(@PathVariable String id,@RequestBody ModifyItemDto putObject){
-        if(!new Integer(id).equals(putObject.getId())){
+    public R modifyItem(@PathVariable String id, @RequestBody ModifyItemDto putObject) {
+        if (!new Integer(id).equals(putObject.getId())) {
             throw new CustomException(ResponseEnum.PARAMS_IS_NULL);
         }
         DictionaryCode dictionaryCode = new DictionaryCode();
@@ -50,13 +51,12 @@ public class DictionaryCodeController {
         dictionaryCode.setSort(putObject.getSort());
         dictionaryCode.setId(putObject.getId());
         this.dictionaryCodeService.updateById(dictionaryCode);
-        return R.ok();
+        return R.success();
     }
 
     @GetMapping("/{id}")
     @ApiOperation("详情")
-    public R getItem(@PathVariable String id){
-        DictionaryCode item = this.dictionaryCodeService.getById(id);
-        return R.ok().data("details",item);
+    public R getItem(@PathVariable String id) {
+        return ResultVoUtil.success(this.dictionaryCodeService.getById(id));
     }
 }

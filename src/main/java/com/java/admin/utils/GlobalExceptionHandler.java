@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = CustomException.class)
     public R allException(CustomException e) {
         log.error("【异常】-【自定义异常】->" + e.getMessage());
-        return R.error().message(e.getMessage());
+        return R.error(e.getMessage());
     }
 
     /**
@@ -74,6 +74,6 @@ public class GlobalExceptionHandler {
     })
     public R handleServletException(Exception e) {
         log.error("【异常】-【请求异常】->" + e.getMessage());
-        return R.error().message(e.getMessage());
+        return R.error(e.getMessage());
     }
 }
