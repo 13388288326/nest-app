@@ -68,7 +68,7 @@ public class DictionaryValueController {
     @GetMapping("/{id}")
     @ApiOperation("详情")
     public R getItem(@PathVariable String id){
-        final DictionaryValue item = this.dictionaryValueService.getById(id);
+        DictionaryValue item = this.dictionaryValueService.getById(id);
         return R.ok().data("details",item);
     }
 
