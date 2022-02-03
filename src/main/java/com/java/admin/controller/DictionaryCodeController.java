@@ -66,7 +66,6 @@ public class DictionaryCodeController {
     @ApiOperation("列表")
     public R pageList(@RequestParam Integer page, @RequestParam Integer pageSize, @RequestParam String search) {
         JSONObject parse = JSONObject.parseObject(search);
-        System.out.println();
         LambdaQueryWrapper<DictionaryCode> wrapper = new LambdaQueryWrapper<>();
         if (!StringUtils.isEmpty(parse.get("code"))) {
             wrapper.eq(DictionaryCode::getCode, parse.get("code"));

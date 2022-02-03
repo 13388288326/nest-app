@@ -1,17 +1,18 @@
 package com.java.admin.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.java.admin.dto.UserAdmin.ModifyItemDto;
 import com.java.admin.dto.UserAdmin.AddItemDto;
 import com.java.admin.entity.UserAdmin;
 import com.java.admin.service.UserAdminService;
-import com.java.admin.utils.CustomException;
-import com.java.admin.utils.R;
-import com.java.admin.utils.ResponseEnum;
-import com.java.admin.utils.ResultVoUtil;
-import com.java.admin.vo.ResultVo;
+import com.java.admin.utils.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -65,5 +66,17 @@ public class UserAdminController {
     @ApiOperation("详情")
     public R getItem(@PathVariable String id) {
         return ResultVoUtil.success(this.userAdminService.getById(id));
+    }
+
+    @GetMapping("/list")
+    @ApiOperation("列表")
+    public R pageList(@RequestParam Integer page, @RequestParam Integer pageSize, @RequestParam String search) {
+        JSONObject parse = JSONObject.parseObject(search);
+        LambdaQueryWrapper<UserAdmin> wrapper = new LambdaQueryWrapper<>();
+        if (!StringUtils.isEmpty(parse.get("userName"))) {
+            wrapper.eq(UserAdmin::getUserName, parse.get("userName"));
+        }
+        IPage<UserAdmin> resultPage = this.userAdminService.page(new Page<>(page,pageSize),wrapper);
+        return ResultVoUtil.success(PageUtil.getPage(resultPage));
     }
 }
