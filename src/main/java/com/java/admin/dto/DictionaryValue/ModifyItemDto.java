@@ -8,7 +8,7 @@ import lombok.Data;
 @TableName("dictionary_value")
 public class ModifyItemDto {
     @ApiModelProperty("主键")
-    private Integer id;
+    private String id;
 
     @ApiModelProperty(value = "字典值",required = true)
     private String value;

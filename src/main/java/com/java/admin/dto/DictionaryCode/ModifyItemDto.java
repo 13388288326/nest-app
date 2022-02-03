@@ -8,7 +8,7 @@ import lombok.Data;
 @TableName("dictionary_code")
 public class ModifyItemDto {
     @ApiModelProperty("主键")
-    private Integer id;
+    private String id;
 
     @ApiModelProperty("字典编码")
     private String code;

@@ -54,7 +54,7 @@ public class DictionaryValueController {
     @PutMapping("/{id}")
     @ApiOperation("修改")
     public R modifyItem(@PathVariable String id, @RequestBody ModifyItemDto putObject) {
-        if (!new Integer(id).equals(putObject.getId())) {
+        if (id.equals(putObject.getId())) {
             throw new CustomException(ResponseEnum.PARAMS_IS_NULL);
         }
         DictionaryValue dictionaryValue = new DictionaryValue();
