@@ -72,7 +72,7 @@ public class DictionaryValueController {
         return R.ok().data("details",item);
     }
 
-    @GetMapping()
+    @GetMapping("/list")
     @ApiOperation("通过字典编码获取字典列表")
     public R codeList(@RequestParam(name = "code",required = true) String code){
         List<DictionaryValue> list = this.dictionaryValueService.getListByCode(code);
