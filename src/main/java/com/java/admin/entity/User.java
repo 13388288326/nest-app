@@ -1,8 +1,6 @@
 package com.java.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,6 +11,7 @@ import java.time.LocalDateTime;
 @ApiModel("用户实体")
 public class User {
     @ApiModelProperty("主键")
+    @TableId(type = IdType.AUTO)
     private String id;
 
     @ApiModelProperty("微信openId")

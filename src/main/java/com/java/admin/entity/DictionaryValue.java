@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class DictionaryValue {
     @ApiModelProperty("主键")
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private String id;
 
     @ApiModelProperty("字典编码")
     private String code;
