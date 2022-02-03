@@ -1,16 +1,18 @@
 package com.java.admin.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.java.admin.dto.DictionaryCode.AddItemDto;
 import com.java.admin.dto.DictionaryCode.ModifyItemDto;
 import com.java.admin.entity.DictionaryCode;
 import com.java.admin.service.DictionaryCodeService;
-import com.java.admin.utils.CustomException;
-import com.java.admin.utils.R;
-import com.java.admin.utils.ResponseEnum;
-import com.java.admin.utils.ResultVoUtil;
+import com.java.admin.utils.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -58,5 +60,18 @@ public class DictionaryCodeController {
     @ApiOperation("详情")
     public R getItem(@PathVariable String id) {
         return ResultVoUtil.success(this.dictionaryCodeService.getById(id));
+    }
+
+    @GetMapping("/list")
+    @ApiOperation("列表")
+    public R pageList(@RequestParam Integer page, @RequestParam Integer pageSize, @RequestParam String search) {
+        JSONObject parse = JSONObject.parseObject(search);
+        System.out.println();
+        LambdaQueryWrapper<DictionaryCode> wrapper = new LambdaQueryWrapper<>();
+        if (!StringUtils.isEmpty(parse.get("code"))) {
+            wrapper.eq(DictionaryCode::getCode, parse.get("code"));
+        }
+        IPage<DictionaryCode> resultPage = this.dictionaryCodeService.page(new Page<>(page, pageSize), wrapper);
+        return ResultVoUtil.success(PageUtil.getPage(resultPage));
     }
 }
