@@ -10,6 +10,9 @@ spring:
     password: 12345678
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/matutinal?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+  redis:
+    host: 127.0.0.1
+    port: 6379
 #    url: jdbc:mysql://120.55.180.212:3306/matutinal?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
 # mybatis-plus配置
 mybatis-plus:

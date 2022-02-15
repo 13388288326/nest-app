@@ -6,13 +6,11 @@ import com.java.admin.entity.DictionaryCode;
 import com.java.admin.entity.DictionaryValue;
 import com.java.admin.service.DictionaryCodeService;
 import com.java.admin.service.DictionaryValueService;
-import com.java.admin.utils.CustomException;
-import com.java.admin.utils.R;
-import com.java.admin.utils.ResponseEnum;
-import com.java.admin.utils.ResultVoUtil;
+import com.java.admin.utils.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +24,9 @@ public class DictionaryValueController {
 
     @Autowired
     private DictionaryCodeService dictionaryCodeService;
+
+    @Autowired
+    private RedisUtils redisUtils;
 
     @PostMapping()
     @ApiOperation("新增")
@@ -75,6 +76,14 @@ public class DictionaryValueController {
     @GetMapping("/list")
     @ApiOperation("通过字典编码获取字典列表")
     public R codeList(@RequestParam(name = "code", required = true) String code) {
-        return ResultVoUtil.success(this.dictionaryValueService.getListByCode(code));
+        Object redisResult = this.redisUtils.get(code);
+        if (redisResult==null){
+            List<DictionaryValue> listByCode = this.dictionaryValueService.getListByCode(code);
+            redisUtils.set(code, listByCode);
+            return ResultVoUtil.success(listByCode);
+        }else {
+            return ResultVoUtil.success(redisResult);
+        }
+
     }
 }

@@ -8,11 +8,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @ApiModel("字典值")
-public class DictionaryValue {
+public class DictionaryValue implements Serializable {
     @ApiModelProperty("主键")
     @TableId(type = IdType.AUTO)
     private String id;
