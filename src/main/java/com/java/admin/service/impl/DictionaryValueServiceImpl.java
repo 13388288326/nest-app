@@ -21,4 +21,16 @@ public class DictionaryValueServiceImpl extends ServiceImpl<DictionaryValueMappe
         queryWrapper.eq(DictionaryValue::getCode, code);
         return this.dictionaryValueMapper.selectList(queryWrapper);
     }
+
+    @Override
+    public Boolean updateByCode(String id, String code) {
+        LambdaQueryWrapper<DictionaryValue> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(DictionaryValue::getCodeValueId, id);
+        List<DictionaryValue> list = this.dictionaryValueMapper.selectList(queryWrapper);
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setCode(code);
+            this.dictionaryValueMapper.updateById(list.get(i));
+        }
+        return null;
+    }
 }

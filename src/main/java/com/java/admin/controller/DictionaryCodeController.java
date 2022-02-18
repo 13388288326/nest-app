@@ -7,13 +7,18 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.java.admin.dto.DictionaryCode.AddItemDto;
 import com.java.admin.dto.DictionaryCode.ModifyItemDto;
 import com.java.admin.entity.DictionaryCode;
+import com.java.admin.entity.DictionaryValue;
 import com.java.admin.service.DictionaryCodeService;
+import com.java.admin.service.DictionaryValueService;
 import com.java.admin.utils.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/dictionaryCode")
@@ -23,13 +28,12 @@ public class DictionaryCodeController {
     @Autowired
     private DictionaryCodeService dictionaryCodeService;
 
+    @Autowired
+    private DictionaryValueService dictionaryValueService;
+
     @PostMapping()
     @ApiOperation("新增")
-    public R addItem(@RequestBody AddItemDto addObject) {
-        DictionaryCode dictionaryCode = new DictionaryCode();
-        dictionaryCode.setCode(addObject.getCode());
-        dictionaryCode.setDescription(addObject.getDescription());
-        dictionaryCode.setSort(addObject.getSort());
+    public R addItem(@RequestBody DictionaryCode dictionaryCode) {
         this.dictionaryCodeService.save(dictionaryCode);
         return R.success();
     }
@@ -43,16 +47,12 @@ public class DictionaryCodeController {
 
     @PutMapping("/{id}")
     @ApiOperation("修改")
-    public R modifyItem(@PathVariable String id, @RequestBody ModifyItemDto putObject) {
-        if (!new Integer(id).equals(putObject.getId())) {
-            throw new CustomException(ResponseEnum.PARAMS_IS_NULL);
+    public R modifyItem(@PathVariable String id, @RequestBody DictionaryCode dictionaryCode) {
+        if (!id.equals(dictionaryCode.getId())) {
+            throw new CustomException(ResponseEnum.PRIMARY_KEY_IS_NOT_EQUAL);
         }
-        DictionaryCode dictionaryCode = new DictionaryCode();
-        dictionaryCode.setCode(putObject.getCode());
-        dictionaryCode.setDescription(putObject.getDescription());
-        dictionaryCode.setSort(putObject.getSort());
-        dictionaryCode.setId(putObject.getId());
         this.dictionaryCodeService.updateById(dictionaryCode);
+        this.dictionaryValueService.updateByCode(dictionaryCode.getId(),dictionaryCode.getCode());
         return R.success();
     }
 

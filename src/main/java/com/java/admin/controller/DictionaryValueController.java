@@ -84,6 +84,5 @@ public class DictionaryValueController {
         }else {
             return ResultVoUtil.success(redisResult);
         }
-
     }
 }
