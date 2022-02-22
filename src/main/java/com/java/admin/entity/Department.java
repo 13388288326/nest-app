@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.java.admin.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
@@ -18,9 +20,10 @@ import java.time.LocalDateTime;
  * @since 2022-02-06 13:52:05
  */
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel("科室表实体")
-public class Department {
+public class Department extends BaseEntity {
     @ApiModelProperty("主键")
     @TableId(type = IdType.AUTO)
     private Integer id;
@@ -42,16 +45,5 @@ public class Department {
 
     @ApiModelProperty("父级科室id,根级别0")
     private Integer parentId;
-
-    @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime createTime;
-
-    @ApiModelProperty("更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime updateTime;
-
 }
 
