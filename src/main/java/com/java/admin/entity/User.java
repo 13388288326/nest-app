@@ -1,15 +1,19 @@
 package com.java.admin.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.java.admin.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-@ApiModel("用户实体")
-public class User {
+@ApiModel("用户表实体")
+public class User extends BaseEntity {
     @ApiModelProperty("主键")
     @TableId(type = IdType.AUTO)
     private String id;
@@ -19,12 +23,4 @@ public class User {
 
     @ApiModelProperty("昵称")
     private String nickName;
-
-    @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    @ApiModelProperty("更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
 }

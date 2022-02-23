@@ -1,7 +1,5 @@
 package com.java.admin.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.java.admin.dto.UserAddDto;
 import com.java.admin.entity.User;
 import com.java.admin.service.UserService;
@@ -18,21 +16,6 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserService userService;
-
-//    @GetMapping("/user/{page}/{pageSize}")
-//    @ApiOperation("获取管理员列表")
-//    public R pageList(
-//            @PathVariable @ApiParam(name = "page", value = "页码", required = true) String page,
-//            @PathVariable @ApiParam(name = "pageSize", value = "页面条数", required = true) String pageSize,
-//            @RequestBody String o
-////            @PathVariable @ApiParam(name = "search", value = "搜索条件", required = false) String search
-//    ) {
-//        System.out.println(o);
-//        IPage<User> query = this.userService.page(new Page<>(Integer.parseInt(page), Integer.parseInt(pageSize)), null);
-//
-//        return R.ok().data("list", query.getRecords()).data("total", query.getTotal());
-//
-//    }
 
     @PostMapping
     @ApiOperation("添加用户")
