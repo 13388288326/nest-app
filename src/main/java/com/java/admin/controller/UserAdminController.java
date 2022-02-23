@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.java.admin.dto.UserAdmin.ModifyItemDto;
-import com.java.admin.dto.UserAdmin.AddItemDto;
 import com.java.admin.entity.UserAdmin;
 import com.java.admin.service.UserAdminService;
 import com.java.admin.utils.*;
@@ -24,14 +22,8 @@ public class UserAdminController {
 
     @PostMapping
     @ApiOperation("新增")
-    public R addItem(@RequestBody AddItemDto addItemDto) {
-        UserAdmin admin = new UserAdmin();
-        admin.setUserName(addItemDto.getUserName());
-        admin.setPassword(addItemDto.getPassword());
-        admin.setPhoneNumber(addItemDto.getPhoneNumber());
-        admin.setAccount(addItemDto.getAccount());
-        admin.setEnable(addItemDto.getEnable());
-        boolean isAdd = this.userAdminService.save(admin);
+    public R addItem(@RequestBody UserAdmin userAdmin) {
+        boolean isAdd = this.userAdminService.save(userAdmin);
         if (!isAdd) {
             throw new CustomException(ResponseEnum.INSERT_ERROR);
         }
@@ -47,18 +39,11 @@ public class UserAdminController {
 
     @PutMapping("/{id}")
     @ApiOperation("修改")
-    public R modifyItem(@PathVariable String id, @RequestBody ModifyItemDto putObject) {
-        if (!id.equals(putObject.getId())) {
+    public R modifyItem(@PathVariable String id, @RequestBody UserAdmin userAdmin) {
+        if (!id.equals(userAdmin.getId())) {
             throw new CustomException(ResponseEnum.PARAMS_IS_NULL);
         }
-        UserAdmin admin = new UserAdmin();
-        admin.setUserName(putObject.getUserName());
-        admin.setPassword(putObject.getPassword());
-        admin.setPhoneNumber(putObject.getPhoneNumber());
-        admin.setAccount(putObject.getAccount());
-        admin.setEnable(putObject.getEnable());
-        admin.setId(putObject.getId());
-        this.userAdminService.updateById(admin);
+        this.userAdminService.updateById(userAdmin);
         return R.success();
     }
 
@@ -76,7 +61,7 @@ public class UserAdminController {
         if (!StringUtils.isEmpty(parse.get("userName"))) {
             wrapper.eq(UserAdmin::getUserName, parse.get("userName"));
         }
-        IPage<UserAdmin> resultPage = this.userAdminService.page(new Page<>(page,pageSize),wrapper);
+        IPage<UserAdmin> resultPage = this.userAdminService.page(new Page<>(page, pageSize), wrapper);
         return ResultVoUtil.success(PageUtil.getPage(resultPage));
     }
 }

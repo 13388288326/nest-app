@@ -1,6 +1,5 @@
 package com.java.admin.controller;
 
-import com.java.admin.dto.UserAddDto;
 import com.java.admin.entity.User;
 import com.java.admin.service.UserService;
 import com.java.admin.utils.Assert;
@@ -19,11 +18,8 @@ public class UserController {
 
     @PostMapping
     @ApiOperation("添加用户")
-    public R addItem(@RequestBody UserAddDto user) {
-        User insertUser = new User();
-        insertUser.setNickName(user.getNickName());
-        insertUser.setOpenId(user.getOpenId());
-        boolean b = this.userService.save(insertUser);
+    public R addItem(@RequestBody User user) {
+        boolean b = this.userService.save(user);
         Assert.isTrue(b, ResponseEnum.INSERT_ERROR);
         return R.success();
     }

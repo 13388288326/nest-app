@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.java.admin.dto.Patient.AddItemDto;
-import com.java.admin.dto.Patient.ModifyItemDto;
 import com.java.admin.entity.Patient;
 import com.java.admin.service.PatientService;
 import com.java.admin.utils.*;

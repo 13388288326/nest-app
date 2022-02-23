@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.java.admin.dto.DictionaryCode.AddItemDto;
-import com.java.admin.dto.DictionaryCode.ModifyItemDto;
 import com.java.admin.entity.DictionaryCode;
-import com.java.admin.entity.DictionaryValue;
 import com.java.admin.service.DictionaryCodeService;
 import com.java.admin.service.DictionaryValueService;
 import com.java.admin.utils.*;
@@ -16,9 +13,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/dictionaryCode")
@@ -52,7 +46,7 @@ public class DictionaryCodeController {
             throw new CustomException(ResponseEnum.PRIMARY_KEY_IS_NOT_EQUAL);
         }
         this.dictionaryCodeService.updateById(dictionaryCode);
-        this.dictionaryValueService.updateByCode(dictionaryCode.getId(),dictionaryCode.getCode());
+        this.dictionaryValueService.updateByCode(dictionaryCode.getId(), dictionaryCode.getCode());
         return R.success();
     }
 

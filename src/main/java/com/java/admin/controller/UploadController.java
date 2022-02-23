@@ -19,10 +19,10 @@ public class UploadController {
 
     @PostMapping("/image")
     @ApiOperation("上传图片")
-    public R uploadImage(@RequestParam("file") MultipartFile file){
+    public R uploadImage(@RequestParam("file") MultipartFile file) {
         String filename = file.getOriginalFilename();
         String fileRootPath = "/Users/junbaba/Desktop/个人/nest-app/src/main/resources/file/";
-        File saveFile= new File(fileRootPath + filename);
+        File saveFile = new File(fileRootPath + filename);
         try {
             file.transferTo(saveFile);
         } catch (IOException e) {
