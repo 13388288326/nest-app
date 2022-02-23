@@ -2,6 +2,7 @@ package com.java.admin.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.java.admin.annotation.Dictionary;
 import com.java.admin.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -32,6 +33,7 @@ public class Patient extends BaseEntity {
     private String defaultSelect;
 
     @ApiModelProperty(value = "证件类型(数据字典)",required = true)
+    @Dictionary
     private String certificateType;
 
     @ApiModelProperty(value = "证件号码",required = true)
@@ -40,6 +42,5 @@ public class Patient extends BaseEntity {
     @ApiModelProperty(value = "关系(数据字典)",required = true)
     private String relationship;
 
-    @ApiModelProperty("用户-就诊人外键id")
     private String userPatientFkId;
 }

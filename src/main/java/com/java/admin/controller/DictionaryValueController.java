@@ -23,7 +23,7 @@ public class DictionaryValueController {
     private DictionaryCodeService dictionaryCodeService;
 
     @Autowired
-    private RedisUtils redisUtils;
+    private RedisUtil redisUtils;
 
     @PostMapping()
     @ApiOperation("新增")
