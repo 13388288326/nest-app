@@ -24,17 +24,7 @@ public class PatientController {
 
     @PostMapping
     @ApiOperation("添加")
-    public R addItem(@RequestBody AddItemDto addItemDto) {
-        Patient patient = new Patient();
-        patient.setUserName(addItemDto.getUserName());
-        patient.setCardNumber(addItemDto.getCardNumber());
-        patient.setPhoneNumber(addItemDto.getPhoneNumber());
-        patient.setAddress(addItemDto.getAddress());
-        patient.setDefaultSelect(addItemDto.getDefaultSelect());
-        patient.setCertificateType(addItemDto.getCertificateType());
-        patient.setCertificateNumber(addItemDto.getCertificateNumber());
-        patient.setRelationship(addItemDto.getRelationship());
-        patient.setUserPatientFkId(addItemDto.getUserId());
+    public R addItem(@RequestBody Patient patient) {
         this.patientService.save(patient);
         return R.success();
     }
@@ -48,20 +38,10 @@ public class PatientController {
 
     @PutMapping("/{id}")
     @ApiOperation("修改")
-    public R modifyItem(@PathVariable String id, @RequestBody ModifyItemDto putObject) {
-        if (!id.equals(putObject.getId())) {
+    public R modifyItem(@PathVariable String id, @RequestBody Patient patient) {
+        if (!id.equals(patient.getId())) {
             throw new CustomException(ResponseEnum.PARAMS_IS_NULL);
         }
-        Patient patient = new Patient();
-        patient.setUserName(putObject.getUserName());
-        patient.setCardNumber(putObject.getCardNumber());
-        patient.setPhoneNumber(putObject.getPhoneNumber());
-        patient.setAddress(putObject.getAddress());
-        patient.setDefaultSelect(putObject.getDefaultSelect());
-        patient.setCertificateType(putObject.getCertificateType());
-        patient.setCertificateNumber(putObject.getCertificateNumber());
-        patient.setRelationship(putObject.getRelationship());
-        patient.setId(putObject.getId());
         this.patientService.updateById(patient);
         return R.success();
     }
@@ -86,7 +66,7 @@ public class PatientController {
 
     @GetMapping("/listByUserId")
     @ApiOperation("根据用户id获取就诊人列表")
-    public R pageList(@RequestParam String id) {
+    public R patientList(@RequestParam String id) {
         LambdaQueryWrapper<Patient> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Patient::getUserPatientFkId, id);
         return ResultVoUtil.success(this.patientService.list(wrapper));

@@ -1,15 +1,12 @@
 package com.java.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.java.admin.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import java.time.LocalDateTime;
+import lombok.EqualsAndHashCode;
 
 /**
  * 医生表(Doctor)表实体类
@@ -18,9 +15,10 @@ import java.time.LocalDateTime;
  * @since 2022-02-06 14:01:52
  */
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel("医生表实体")
-public class Doctor {
+public class Doctor extends BaseEntity {
     @ApiModelProperty("主键")
     @TableId(type = IdType.AUTO)
     private Integer id;
@@ -45,16 +43,5 @@ public class Doctor {
 
     @ApiModelProperty("科室-医生外键")
     private Integer departmentDoctorFkId;
-
-    @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime createTime;
-
-    @ApiModelProperty("更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime updateTime;
-
 }
 

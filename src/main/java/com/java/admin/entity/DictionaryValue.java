@@ -1,19 +1,19 @@
 package com.java.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.java.admin.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel("字典值")
-public class DictionaryValue implements Serializable {
+public class DictionaryValue extends BaseEntity implements Serializable {
     @ApiModelProperty("主键")
     @TableId(type = IdType.AUTO)
     private String id;
@@ -32,12 +32,4 @@ public class DictionaryValue implements Serializable {
 
     @ApiModelProperty("字典编码外键")
     private Integer codeValueId;
-
-    @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    @ApiModelProperty("更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
 }

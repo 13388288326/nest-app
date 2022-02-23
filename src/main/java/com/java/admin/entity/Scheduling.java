@@ -1,17 +1,13 @@
 package com.java.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.java.admin.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -50,6 +46,5 @@ public class Scheduling extends BaseEntity {
 
     @ApiModelProperty("下午接诊时间(HH:mm:ss)")
     private LocalTime afternoonTime;
-
 }
 

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/userAdmins")
-@Api(tags = "管理员")
+@Api(tags = "web端管理员")
 public class UserAdminController {
     @Autowired
     private UserAdminService userAdminService;
