@@ -1,5 +1,6 @@
 package com.java.admin.controller;
 
+import com.java.admin.annotation.Dictionary;
 import com.java.admin.entity.DictionaryCode;
 import com.java.admin.entity.DictionaryValue;
 import com.java.admin.service.DictionaryCodeService;
@@ -32,6 +33,9 @@ public class DictionaryValueController {
         if (item == null) {
             throw new CustomException("未找到字典编码父级", 500);
         }
+//        DictionaryValue insertDictionaryValue = new DictionaryValue();
+//        insertDictionaryValue.setValue(dictionaryValue.getValue());
+//        insertDictionaryValue.setCodeValueId(dictionaryValue.getValue());
         this.dictionaryValueService.save(dictionaryValue);
         return R.success();
     }
