@@ -66,13 +66,6 @@ public class DictionaryValueController {
     @GetMapping("/list")
     @ApiOperation("通过字典编码获取字典列表")
     public R codeList(@RequestParam(name = "code", required = true) String code) {
-        Object redisResult = this.redisUtils.get(code);
-        if (redisResult == null) {
-            List<DictionaryValue> listByCode = this.dictionaryValueService.getListByCode(code);
-            redisUtils.set(code, listByCode);
-            return ResultVoUtil.success(listByCode);
-        } else {
-            return ResultVoUtil.success(redisResult);
-        }
+        return ResultVoUtil.success(this.dictionaryValueService.getListByCode(code));
     }
 }
