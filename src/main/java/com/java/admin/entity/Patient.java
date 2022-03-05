@@ -27,7 +27,6 @@ public class Patient extends BaseEntity {
     private String defaultSelect;
 
     @ApiModelProperty(value = "证件类型(数据字典)",required = true)
-    @Dictionary
     private String certificateType;
 
     @ApiModelProperty(value = "证件号码",required = true)
