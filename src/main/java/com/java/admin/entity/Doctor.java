@@ -37,5 +37,8 @@ public class Doctor extends BaseEntity {
 
     @ApiModelProperty("科室-医生外键")
     private Integer departmentDoctorFkId;
+
+    @ApiModelProperty("医生状态")
+    private String status;
 }
 
