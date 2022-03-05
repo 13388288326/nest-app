@@ -1,7 +1,5 @@
 package com.java.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.java.admin.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -22,10 +20,6 @@ import java.util.Date;
 @Data
 @ApiModel("排班表实体")
 public class Scheduling extends BaseEntity {
-    @ApiModelProperty("主键")
-    @TableId(type = IdType.AUTO)
-    private Integer id;
-
     @ApiModelProperty("排班日期(YYYY-MM-DD)")
     private Date time;
 

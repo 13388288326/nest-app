@@ -1,7 +1,5 @@
 package com.java.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.java.admin.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,10 +12,6 @@ import java.io.Serializable;
 @Data
 @ApiModel("字典值")
 public class DictionaryValue extends BaseEntity implements Serializable {
-    @ApiModelProperty("主键")
-    @TableId(type = IdType.AUTO)
-    private String id;
-
     @ApiModelProperty("字典编码")
     private String code;
 

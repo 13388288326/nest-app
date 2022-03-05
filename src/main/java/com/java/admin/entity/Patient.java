@@ -1,7 +1,5 @@
 package com.java.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.java.admin.annotation.Dictionary;
 import com.java.admin.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
@@ -13,10 +11,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @ApiModel("就诊人表")
 public class Patient extends BaseEntity {
-    @ApiModelProperty("主键")
-    @TableId(type = IdType.AUTO)
-    private String id;
-
     @ApiModelProperty(value = "就诊人姓名",required = true)
     private String userName;
 

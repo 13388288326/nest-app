@@ -1,7 +1,5 @@
 package com.java.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.java.admin.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,10 +10,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @ApiModel("管理员")
 public class UserAdmin extends BaseEntity {
-    @ApiModelProperty("主键")
-    @TableId(type = IdType.AUTO)
-    private String id;
-
     @ApiModelProperty("用户名")
     private String userName;
 

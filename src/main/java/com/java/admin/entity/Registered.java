@@ -1,7 +1,5 @@
 package com.java.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.java.admin.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -19,10 +17,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @ApiModel("挂号表实体")
 public class Registered extends BaseEntity {
-    @ApiModelProperty("主键")
-    @TableId(type = IdType.AUTO)
-    private Integer id;
-
     @ApiModelProperty("挂号主类型(数据字典)")
     private String parentType;
 

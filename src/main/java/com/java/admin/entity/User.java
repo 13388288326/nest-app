@@ -1,6 +1,5 @@
 package com.java.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
 import com.java.admin.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,10 +10,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @ApiModel("用户表实体")
 public class User extends BaseEntity {
-    @ApiModelProperty("主键")
-    @TableId(type = IdType.AUTO)
-    private String id;
-
     @ApiModelProperty("微信openId")
     private String openId;
 
