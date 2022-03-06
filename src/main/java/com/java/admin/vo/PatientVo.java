@@ -1,27 +1,15 @@
 package com.java.admin.vo;
 
 import com.java.admin.entity.Patient;
-import com.java.admin.utils.Helper;
-import com.java.admin.utils.RedisUtil;
-import lombok.EqualsAndHashCode;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.java.admin.utils.RedisDistUtil;
+import java.io.Serializable;
 
-@EqualsAndHashCode(callSuper = true)
-public class PatientVo extends Patient {
-    @Autowired
-    private RedisUtil redisUtils;
+public class PatientVo extends Patient implements Serializable{
+    private static final long serialVersionUID = -2145503717390503506L;
 
-    private String certificateTypeStr;
-    private String relationshipStr;
+    private String CertificateTypeStr;
 
-    public String getCertificateTypeStr() {
-        Object o = redisUtils.get("certificateType");
-        String  fieldValue =(String) Helper.getFieldValueByName(this.getCertificateType(), o);
-        System.out.println(fieldValue);
-        return "";
-    }
-
-    public String getRelationshipStr() {
-        return relationshipStr;
+    private String getCertificateTypeStr() {
+        return RedisDistUtil.transformStr("certificateType",this.getCertificateType());
     }
 }
