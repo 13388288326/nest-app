@@ -1,6 +1,5 @@
 package com.java.admin.utils;
 
-import com.java.admin.service.DictionaryCodeService;
 import com.java.admin.service.SysDictService;
 import org.springframework.context.ApplicationContext;
 

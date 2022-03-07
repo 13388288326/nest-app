@@ -47,7 +47,7 @@ public class PatientController {
     @GetMapping("/{id}")
     @ApiOperation("详情")
     public R getItem(@PathVariable String id) {
-        return ResultVoUtil.success(this.patientService.getById(id));
+        return ResultVoUtil.success(this.patientService.getDetail(id));
     }
 
     @GetMapping("/list")
