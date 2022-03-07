@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.java.admin.dto.SchedulingInsertDto;
 import com.java.admin.entity.Scheduling;
 import com.java.admin.service.SchedulingService;
 import com.java.admin.utils.*;
@@ -28,8 +29,8 @@ public class SchedulingController {
 
     @PostMapping
     @ApiOperation("新增")
-    public R insert(@RequestBody Scheduling scheduling) {
-        this.schedulingService.save(scheduling);
+    public R insert(@RequestBody SchedulingInsertDto SchedulingInsertDto) {
+//        this.schedulingService.save(scheduling);
         return R.success();
     }
 
