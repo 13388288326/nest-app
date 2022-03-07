@@ -1,9 +1,13 @@
 package com.java.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.java.admin.dto.DepartmentInsertDto;
 import com.java.admin.mapper.DepartmentMapper;
 import com.java.admin.entity.Department;
 import com.java.admin.service.DepartmentService;
+import com.java.admin.utils.CustomException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,5 +19,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Department> implements DepartmentService {
 
+    @Autowired
+    private DepartmentService departmentService;
+
+    @Override
+    public Boolean addData(DepartmentInsertDto department) {
+
+        Department insertDept = new Department();
+        insertDept.setDepartmentName(department.getDepartmentName());
+        //可以不传默认传入root
+        if (StringUtils.isBlank(department.getParentId())) {
+            insertDept.setParentId("root");
+        }
+        insertDept.setCampus(department.getCampus());
+        insertDept.setLocation(department.getLocation());
+        insertDept.setStatus(StringUtils.isBlank(department.getStatus()) ? "0" : "1");
+        return  this.departmentService.save(insertDept);
+    }
 }
 

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.java.admin.dto.DepartmentInsertDto;
 import com.java.admin.entity.Department;
 import com.java.admin.service.DepartmentService;
 import com.java.admin.utils.*;
@@ -28,8 +29,8 @@ public class DepartmentController {
 
     @PostMapping
     @ApiOperation("新增")
-    public R insert(@RequestBody Department department) {
-        this.departmentService.save(department);
+    public R insert(@RequestBody DepartmentInsertDto department) {
+        this.departmentService.addData(department);
         return R.success();
     }
 

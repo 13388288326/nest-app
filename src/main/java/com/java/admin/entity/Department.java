@@ -23,7 +23,7 @@ public class Department extends BaseEntity {
     @ApiModelProperty("科室类型(数据字典)")
     private String departmentType;
 
-    @ApiModelProperty("数据字典")
+    @ApiModelProperty("所属院区(数据字典)")
     private String campus;
 
     @ApiModelProperty("科室位置")
@@ -33,6 +33,6 @@ public class Department extends BaseEntity {
     private String status;
 
     @ApiModelProperty("父级科室id,根级别0")
-    private Integer parentId;
+    private String parentId;
 }
 
